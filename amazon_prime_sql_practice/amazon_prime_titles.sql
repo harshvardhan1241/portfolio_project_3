@@ -15,3 +15,20 @@
 14. For each rating, how many Movies and TV Shows are available?
 15. How many titles fall into each category based on keywords such as **"love"**, **"crime"**, and **"family"** in their descriptions?
 */
+
+DROP TABLE if EXISTS amzon_prime;
+CREATE TABLE amzon_prime 
+(
+show_id VARCHAR(60),
+type VARCHAR(100),
+title VARCHAR(200),
+director VARCHAR(210),
+casts VARCHAR(1000),
+country VARCHAR(150),
+date_added date,
+release_year int,
+rating VARCHAR(100),
+duration VARCHAR(15),
+listed_in VARCHAR(1000),
+description VARCHAR(10000)
+)
