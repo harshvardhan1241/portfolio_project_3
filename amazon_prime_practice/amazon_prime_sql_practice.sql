@@ -69,3 +69,7 @@ count(*) as total_count
  LIMIT 1;
 --most common rating on amazon prime is 13+
  
+ --3. Which 10 years had the highest number of Movies and TV Shows released?
+SELECT
+FROM 
+amazon_prime as ap
