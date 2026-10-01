@@ -109,5 +109,10 @@ ORDER by count(show_id) DESC
 LIMIT 10;
 
 --7. Which movies have a duration greater than 120 minutes?
-select from amazon_prime as ap
-where type = 'Movie' and cast(split_part(duration,' ',1) as int) > 120;
+select
+title,
+duration,
+listed_in
+ from amazon_prime as ap
+where type = 'Movie' and cast(split_part(duration,' ',1) as int) > 120
+ORDER by duration DESC
