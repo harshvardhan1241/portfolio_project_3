@@ -8,14 +8,7 @@
 7. Which movies have a duration greater than 120 minutes?
 8. Which TV Shows have more than 3 seasons?
 9. Which 10 directors have directed the highest number of titles?
-10. Which 10 actors have appeared in the highest number of movies?
-11. How many movies were released on Amazon Prime in the last 10 years?
-12. What is the average release year of movies for each country?
-13. Which directors have directed at least 5 titles?
-14. For each rating, how many Movies and TV Shows are available?
-15. How many titles fall into each category based on keywords such as **"love"**, **"crime"**, and **"family"** in their descriptions?
 */
-
 
 DROP TABLE if EXISTS amazon_prime;
 --creation of the tabel for the amazon prime data base
@@ -116,3 +109,22 @@ listed_in
  from amazon_prime as ap
 where type = 'Movie' and cast(split_part(duration,' ',1) as int) > 120
 ORDER by duration DESC
+
+--8. Which TV Shows have more than 3 seasons?
+select
+title,
+duration,
+listed_in
+ from amazon_prime as ap
+where type = 'TV Show' and cast(split_part(duration,' ',1) as int) > 3
+order by duration DESC
+
+--9. Which 10 directors have directed the highest number of titles?
+select
+director,
+count(show_id) as total_count
+from amazon_prime as ap
+where director is not NULL
+GROUP BY director
+ORDER BY total_count DESC
+LIMIT 10;
