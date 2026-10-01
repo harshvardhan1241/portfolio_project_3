@@ -71,5 +71,43 @@ count(*) as total_count
  
  --3. Which 10 years had the highest number of Movies and TV Shows released?
 SELECT
-FROM 
+release_year,
+count(*) as total_count
+ FROM 
 amazon_prime as ap
+ GROUP BY
+ release_year
+ ORDER by count(*) DESC 
+ LIMIT 10;
+
+--4. How many titles were added to Amazon Prime in each year?
+SELECT
+count(title) as total_count,
+extract(year from date_added) as year_added
+FROM amazon_prime as ap
+where date_added is not NULL
+GROUP BY year_added;
+
+--5. Which 5 countries have produced the highest number of Amazon Prime titles?
+SELECT
+trim(unnest(string_to_array(country,','))) as country,
+count(show_id) as total_count
+FROM amazon_prime as ap
+where country is not NULL
+GROUP BY 1
+ORDER by count(show_id) DESC
+LIMIT 5;
+
+--6. What are the top 10 genres with the highest number of titles?
+SELECT
+trim(unnest(string_to_array(listed_in,','))) as genre,
+count(show_id) as total_count
+FROM amazon_prime as ap
+where listed_in is not NULL
+GROUP BY 1
+ORDER by count(show_id) DESC
+LIMIT 10;
+
+--7. Which movies have a duration greater than 120 minutes?
+select from amazon_prime as ap
+where type = 'Movie' and cast(split_part(duration,' ',1) as int) > 120;
